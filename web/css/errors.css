@@ -1,0 +1,169 @@
+a {
+    text-decoration: none;
+    color: #4285f4
+}
+
+a:hover {
+    color: #2a75f3
+}
+
+h1 {
+    display: none
+}
+
+body {
+    background: #fff;
+    color: #999;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    margin: 0
+}
+
+code {
+    background: #efeeee;
+    border-radius: 2px;
+    font-family: monospace;
+    font-size: 14px;
+    margin: 0;
+    padding: 2px 4px;
+    overflow-wrap: break-word
+}
+
+.brand-container {
+    margin-bottom: 30px;
+    width: 175px
+}
+
+.brand {
+    background: url(../images/brand/marsble/marsblelogo.png) center no-repeat;
+    background-size: 100%;
+    width: 175px;
+    height: 40px;
+    margin: 20px 0
+}
+
+.errors {
+    width: auto;
+    margin: 20px 20px 35px;
+    clear: both;
+    padding: 1px 20px 0;
+    font-weight: 300;
+    line-height: 25px;
+    border-radius: 2px;
+    color: #666
+}
+
+.lead {
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0
+}
+
+.red {
+    color: #f44336
+}
+
+.green {
+    color: #58c558
+}
+
+.blue {
+    color: #4285f4
+}
+
+.aligncenter {
+    text-align: center
+}
+
+.emoji {
+    width: 36px;
+    margin: 10px 5px -10px 0
+}
+
+.mb {
+    font-weight: normal;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    color: #666;
+    display: inline-block;
+    margin: 2px auto;
+    padding: 2px 10px;
+    text-decoration: none;
+    border-radius: 2px;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    background-image: none;
+    vertical-align: middle;
+    touch-action: manipulation;
+    line-height: 1.42857
+}
+
+.mb:hover {
+    text-decoration: none
+}
+
+.mb:focus {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+}
+
+.mb-default:hover {
+    background: #f2f2f2;
+    color: #555
+}
+
+.mb-prime {
+    background: #4285f4;
+    border-color: #4285f4;
+    color: #fff
+}
+
+.mb-prime:hover {
+    background: #2a75f3;
+    border-color: #2a75f3;
+    color: #fff
+}
+
+.message {
+    margin-bottom: 20px
+}
+
+.separator {
+    background: #4285f4;
+    height: 1px;
+    margin-bottom: 10px
+}
+
+.foot {
+    font-size: 13px;
+    margin-bottom: 35px;
+    text-align: center
+}
+
+.footmenu {
+    padding-left: 0
+}
+
+.footmenu li {
+    display: inline-block
+}
+
+.footmenu li+li {
+    margin-left: 10px
+}
+
+@media (min-width: 768px) {
+    .brand-container {
+        margin-top: 50px
+    }
+    .errors {
+        margin: 40px auto 35px;
+        width: 540px
+    }
+}
+
+::selection {
+    background: #b3d4fc;
+    color: #fff;
+    text-shadow: none
+}

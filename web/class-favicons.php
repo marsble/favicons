@@ -15,10 +15,10 @@
 
 class Favicons {
 
-    const version = '1.3';
+    const version = '1.3.1';
 
     public $domain = null;
-    public $favicon = 'favicon_default.ico'; // Set default favicon
+    public $favicon = 'favicon_default.ico'; // Set default favicon <http://transparent-favicon.info>
     public $expires = 86400; // 1 Day as seconds
     public $userAgent = 'MarsbleFavicons';
     public $debugMode = false;
@@ -99,18 +99,18 @@ class Favicons {
         // Get favicon from HTML `<link>`
         } else if ($result = $this->cURL($prefix . $domain)) {
             if (
-                stripos($result, '<link ') !== false &&
+                stripos($result, '<link') !== false &&
                 stripos($result, 'href=') !== false &&
                 stripos($result, 'rel=') !== false &&
-                preg_match_all('#<link(?:\s[^<>]+?)?\/?>#i', $result, $m)
+                preg_match_all('#<link(?:\s[^>]+?)\/?>#i', $result, $m)
             ) {
                 foreach ($m[0] as $html) {
                     // Check for `rel` attribute
                     $value = 'apple-touch-icon(?:-precomposed)?|msapplication-TileImage|(?:shortcut\s+)?icon';
-                    if (stripos($html, 'rel=') !== false && preg_match('#\srel=([\'"]?)(' . $value . ')\1#i', $html)) {
+                    if (stripos($html, 'rel=') !== false && preg_match('#\srel=([\'"]?)(' . $value . ')\1#i', $html, $m)) {
                         $this->results['rel'] = $m[2];
                         // Check for `href` attribute
-                        if (stripos($html, 'href=') !== false && preg_match('#\shref=([\'"]?)(.*?)\1#i', $html, $m)) {
+                        if (stripos($html, 'href=') !== false && preg_match('#\shref=([\'"]?)([^\s>]+)\1#i', $html, $m)) {
                             $href = $m[2];
                             // Maybe relative protocol
                             if (strpos($href, '//') === 0) {
@@ -118,17 +118,21 @@ class Favicons {
                             // Maybe relative path
                             } else if (strpos($href, '/') === 0) {
                                 $href = $prefix . $domain . $href;
+                            // Maybe relative path without leading `/`
+                            } else if (strpos($href, '://') === false) {
+                                $href = $prefix . $domain . '/' . $href;
                             }
                             $this->results['href'] = $href;
                             if ($result = $this->cURL($href)) {
                                 // Check for `type` attribute
-                                if (stripos($html, 'type=') !== false && preg_match('#\stype=([\'"]?)(.*?)\1#i', $html, $m)) {
+                                if (stripos($html, 'type=') !== false && preg_match('#\stype=([\'"]?)([^\s>]+)\1#i', $html, $m)) {
                                     // Set custom favicon type
                                     $this->results['type'] = $m[2];
                                 // Else ...
                                 } else {
-                                    $type = pathinfo($href, PATHINFO_EXTENSION);
+                                    $type = (string) pathinfo($href, PATHINFO_EXTENSION);
                                     switch ($type) {
+                                        case "": // Default to `x-icon`
                                         case 'ico':
                                             $type = 'x-icon';
                                         break;
@@ -137,7 +141,7 @@ class Favicons {
                                             $type = 'jpeg';
                                         break;
                                     }
-                                    // ... guess it by the file extension
+                                    // ... guess it from the file extension
                                     $this->results['type'] = 'image/' . $type;
                                 }
                                 $this->results['blob'] = $result;
