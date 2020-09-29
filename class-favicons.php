@@ -1,26 +1,24 @@
 <?php
-
 /**
- * Favicons
- * Proxying favicon from a domain name
+ * Icon
  *
- * This is Class for Favicons, this script is allowing you
- * to proxying favicon from a domain name and set default
- * favicon if no one exist.
+ * PHP class to get an icon from a website. This works by crawling the source
+ * code, if no one is found then fetch it from the `/favicon.ico` path, and if
+ * still not found it will send `default.ico`.
  *
- * @author    Marsble Team
+ * @author    Statically Team
  * @license   MIT
- * @copyright 2018 Marsble
+ * @copyright 2018-2020 Statically
  */
 
-class Favicons {
+class Icon {
 
-    const version = '1.3.1';
+    const version = '1.4.1';
 
     public $domain = null;
-    public $favicon = 'favicon_default.ico'; // Set default favicon <http://transparent-favicon.info>
-    public $expires = 86400; // 1 Day as seconds
-    public $userAgent = 'MarsbleFavicons';
+    public $favicon = 'default.ico'; // Set default favicon <http://transparent-favicon.info>
+    public $expires = 2678400; // 1 month
+    public $userAgent = 'Statically-Icon';
     public $debugMode = false;
     public $attempt = 2; // Maximum `curl` access to try
 
@@ -170,11 +168,12 @@ class Favicons {
         $this->fetch();
         if (!$this->debugMode) {
             if ($this->expires) {
-                header('Cache-Control: public, max-age=' . $this->expires);
+                header('Cache-Control: public, max-age=' . $this->expires . ', immutable');
             } else {
-                header('Cache-Control: no-cache');
+                header('Cache-Control: public, max-age=0');
             }
             header('Content-Type: ' . $type);
+            header('ETag: "stly' . substr( md5( $this->results['blob'] . '.' . time() ), 0, 12 ) . '"');
         } else {
             header('Content-Type: text/plain');
             header('Cache-Control: no-cache');

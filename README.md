@@ -1,91 +1,51 @@
-Favicons
-========
+<p align="center">
+  <a href="https://statically.io/favicons/">
+    <img src="https://cdn.statically.io/img/statically.io/images/branding/statically-mark.svg" alt="Statically" height="80"/>
+  </a>
+</p>
 
-Free Favicons API with Super Fast Global CDN, proxying favicon from a domain. This is the code behind `favicons.marsble.com`.
+<h1 align="center">Icon</h1>
 
- - See _Favicons_ on [Staticaly](https://www.staticaly.com/favicons)
- - Visit [favicons.marsble.com](https://favicons.marsble.com) to learn more about _Favicons_.
+<p align="center">Get a website icon by crawling HTML.</p>
 
-Usage
------
+<p align="center">
+  <a href="https://statically.io">statically.io</a> |
+  <a href="https://twitter.com/staticallyio">Twitter</a> |
+  <a href="https://statically.discourse.group">Community</a> |
+  <a href="https://www.patreon.com/fransallen">Become A Backer</a>
+  <br /><br />
+	<a href="https://hub.docker.com/r/statically/icon">
+    <img src="https://img.shields.io/docker/cloud/build/statically/icon" alt="Docker Cloud Build Status" />
+  </a>
+  <a href="https://hub.docker.com/r/statically/icon">
+    <img src="https://img.shields.io/docker/pulls/statically/icon?color=success" alt="Docker Pulls" />
+  </a>
+  <a href="https://hub.docker.com/r/statically/icon">
+    <img src="https://img.shields.io/docker/image-size/statically/icon/latest?color=success" alt="Docker Image Size" />
+  </a>
+</p>
 
-~~~ .txt
-GET `https://favicons.marsble.com/:domain`
-~~~
+## :sparkles: Overview
 
-**Example:**
+**Icon** is a simple application to get an icon from a website by crawling the source code. It's designed to be simple and easy to install anywhere.
 
- - [https://favicons.marsble.com/marsble.com](https://favicons.marsble.com/marsble.com)
- - [https://favicons.marsble.com/github.com](https://favicons.marsble.com/github.com)
+## :bulb: Features
 
-**Result:**
+- Get an icon by crawling HTML.
+- Get an icon from `/favicon.ico` path.
+- Serve [default.ico](default.ico) if none of the above is set.
 
-![Marsble](https://favicons.marsble.com/marsble.com) &middot; ![GitHub](https://favicons.marsble.com/github.com)
+## :zap: Installation
 
-Miscellaneous
--------------
+We'll be using Docker as an easy way to install. However since this is a PHP application, you can run it with your current setup.
 
-### Get as Raw Blob
+### Run the app
 
-~~~ .txt
-GET `https://favicons.marsble.com/marsble.com?raw`
-~~~
+```bash
+docker run -d \
+  --name icon \
+  -p 7000:7000 \
+  statically/icon:latest
+```
 
-### Get as Base64 String
-
-~~~ .txt
-GET `https://favicons.marsble.com/marsble.com?base64`
-~~~
-
-### Get as JSON
-
-~~~ .txt
-GET `https://favicons.marsble.com/marsble.com?json`
-~~~
-
-### Get as HTML
-
-~~~ .txt
-GET `https://favicons.marsble.com/marsble.com?html`
-~~~
-
-### Get as XHTML
-
-~~~ .txt
-GET `https://favicons.marsble.com/marsble.com?xhtml`
-~~~
-
-### Force to Use SSL
-
-~~~ .txt
-GET `https://favicons.marsble.com/marsble.com?ssl=1`
-~~~
-
-### Disable Cache
-
-~~~ .txt
-GET `https://favicons.marsble.com/marsble.com?cache=0`
-~~~
-
-### Set Custom Cache (In Seconds)
-
-Example for 1 year:
-
-~~~ .txt
-GET `https://favicons.marsble.com/marsble.com?cache=31556952`
-~~~
-
-Installation
-------------
-
-Clone this repository to your server and serve it with your favorite web server.
-
-Documentations
---------------
-
-Documentation is available on [Developers page](https://developers.marsble.com/favicons).
-
-License
--------
-
-MIT
+This will start the PHP FPM server so you can add it to your current web server.
