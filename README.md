@@ -44,7 +44,7 @@ We'll be using Docker as an easy way to install. However since this is a PHP app
 ```bash
 docker run -d \
   --name icon \
-  -p 7000:7000 \
+  -p 9000:9000 \
   statically/icon:latest
 ```
 
