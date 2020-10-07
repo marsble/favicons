@@ -36,7 +36,7 @@ foreach (['base64', 'html', 'json', 'raw', 'xhtml'] as $output) {
 error_reporting(ICON_DEBUG ? E_ALL | E_STRICT : 0);
 
 if (is_home()) {
-    header('Location: https://statically.io/favicons/');
+    header('Location: https://statically.io/docs/using-icon/');
 } else {
     require __DIR__ . '/class-icon.php';
     $icon = new Icon(ICON_URL_PATH);
